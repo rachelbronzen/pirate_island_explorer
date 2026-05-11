@@ -3,11 +3,11 @@ import sys
 import math
 from enum import Enum
 
-from settings import *
-from map_data import generate_map_with_difficulty, get_random_treasure_position
-from player import Player
-from dfs import dfs
-from dijkstra import dijkstra_shortest_path, get_tile_cost  # Import Dijkstra yang baru
+from pirate_island_explorer.pirate_island_explorer.settings import *
+from pirate_island_explorer.pirate_island_explorer.map_data import generate_map_with_difficulty, get_random_treasure_position
+from pirate_island_explorer.pirate_island_explorer.player import Player
+from pirate_island_explorer.pirate_island_explorer.dfs import dfs
+from pirate_island_explorer.pirate_island_explorer.dijkstra import dijkstra_shortest_path, get_tile_cost  # Import Dijkstra yang baru
 
 # Game States
 class GameState(Enum):
