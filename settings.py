@@ -5,7 +5,6 @@ COLS = 10
 TILE_SIZE = 80
 FPS = 60
 
-# Warna - Theme Pirate
 BLACK = (10, 10, 10)
 DARK_BROWN = (40, 25, 15)
 NAVY_BLUE = (20, 40, 80)

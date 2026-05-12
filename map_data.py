@@ -1,9 +1,3 @@
-# W = Water (tidak bisa dilalui)
-# L = Land (bisa dilalui)
-# T = Treasure (bisa dilalui)
-# F = Forest (bisa dilalui)
-# R = Rock (bisa dilalui)
-
 import random
 
 GAME_MAP_BASE = [
@@ -23,29 +17,27 @@ GAME_MAP = [row[:] for row in GAME_MAP_BASE]
 
 def generate_map_with_difficulty(level):
     """
-    Generate map berdasarkan level (1-5).
-    Level yang lebih tinggi = lebih banyak obstacles (rocks dan forests)
+    Generate map based on level (1-5).
+    Higher levels = more obstacles (rocks and forests)
     """
     import copy
     game_map = copy.deepcopy(GAME_MAP_BASE)
     
-    # Level menentukan jumlah obstacles tambahan
     obstacle_count = {
-        1: 2,   # Level 1: minimal obstacles
+        1: 2,  
         2: 4,
         3: 6,
         4: 8,
-        5: 10   # Level 5: banyak obstacles
+        5: 10   
     }
     
     num_obstacles = obstacle_count.get(level, 2)
     
-    # Acak penempatan rocks dan forests
     for _ in range(num_obstacles):
         while True:
             row = random.randint(1, 8)
             col = random.randint(1, 8)
-            if game_map[row][col] == "L":  # Hanya ubah land
+            if game_map[row][col] == "L": 
                 obstacle_type = random.choice(["R", "F"])
                 game_map[row][col] = obstacle_type
                 break
@@ -54,24 +46,22 @@ def generate_map_with_difficulty(level):
 
 def get_random_treasure_position(game_map):
     """
-    Dapatkan random treasure position dari land tiles yang accessible.
-    Pastikan jauh dari starting position (1,1)
-    PENTING: Juga mengubah tile di map menjadi "T"
+    Get a random treasure position from accessible land tiles.
+    Make sure it is far from the starting position (1,1).
+    IMPORTANT: Also changes the tile on the map to "T"
     """
     valid_positions = []
-    for row in range(2, 8):  # Hindari edge
+    for row in range(2, 8): 
         for col in range(2, 8):
             if game_map[row][col] == "L":
                 distance = abs(row - 1) + abs(col - 1)
-                if distance >= 6:  # Minimal distance dari start
+                if distance >= 6:  
                     valid_positions.append((row, col))
     
     if valid_positions:
         treasure_pos = random.choice(valid_positions)
-        # PENTING: Ubah tile di map menjadi "T" agar bisa di-render
         game_map[treasure_pos[0]][treasure_pos[1]] = "T"
         return treasure_pos
     else:
-        # Default fallback
         game_map[8][6] = "T"
         return (8, 6)

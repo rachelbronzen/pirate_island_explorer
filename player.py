@@ -7,7 +7,6 @@ class Player:
         self.distance_traveled = 0
         self.direction = 'right'
         
-        # Sistem Stamina Baru
         self.max_stamina = max_stamina
         self.current_stamina = max_stamina
         self.is_dead = False
@@ -17,7 +16,6 @@ class Player:
         self.row = new_row
         self.col = new_col
         
-        # Kurangi stamina sesuai bobot tile
         self.current_stamina -= stamina_cost
         if self.current_stamina <= 0:
             self.current_stamina = 0
